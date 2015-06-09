@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include meta.html %>
+
+    <link href="/stylesheets/signup.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signup" role="form" method="post">
+        <h3 class="form-signup-heading">请注册</h3>
+        <%- message %>
+        <input name="user_id" type="text" class="form-control first" placeholder="学号" required autofocus>
+        <input name="user_name" type="text" class="form-control mid" placeholder="姓名" required autofocus>
+        <input name="email" type="email" class="form-control mid" placeholder="邮箱" required>
+        <input name="password" type="password" class="form-control mid" placeholder="密码" required>
+        <input type="password" class="form-control end" placeholder="重复密码" required>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+      </form>
+
+    </div> <!-- /container -->
+
+    <% include footer.html %>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>

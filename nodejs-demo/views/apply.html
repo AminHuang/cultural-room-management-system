@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include meta.html %>
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/apply.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <% include header.html %>
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+        <div class="page-header">
+          <h1>请以团队名义申请文化室</h1>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+          
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="applyroom" class="col-sm-2 control-label">文化室</label>
+              <div class="col-sm-10">
+                <select id="applyroom" class="form-control">
+                  <option value="慎五文化室">慎五文化室</option>
+                  <option value="至二文化室">至二文化室</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="applyid" class="col-sm-2 control-label">学号</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="applyid" value="<%= user.user_id %>" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="applyname" class="col-sm-2 control-label">姓名</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="applyname" value="<%= user.user_name %>" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="applyteam" class="col-sm-2 control-label">团队名称</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="applyteam" placeholder="团队名称">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="applytime" class="col-sm-2 control-label">申请时间段</label>
+              <div class="col-sm-10 form-inline">
+                <input id="applydate" type="date" class="form-control" placeholder="年-月-日" required autofocus>
+                <select id="startTime" class="form-control">
+                  <option value="8">8:00</option>
+                  <option value="22">22:00</option>
+                </select>
+                <span>-</span>
+                <select id="endTime" class="form-control">
+                  <option value="9">9:00</option>
+                  <option value="23">23:00</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="applynum" class="col-sm-2 control-label">使用人数</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="applynum" placeholder="使用人数">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button id="applybtn" class="btn btn-md btn-primary">申请</button>
+              </div>
+            </div>
+            
+          </form>
+        
+        </div><!--/span-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <h3>我的申请</h3>
+          <div class="list-group">
+            <a href="#" class="list-group-item active">慎五文化室</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2014</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+    <% include footer.html %>
+    <script src="/javascripts/offcanvas.js"></script>
+    <script src="/javascripts/apply.js"></script>
+  </body>
+</html>
