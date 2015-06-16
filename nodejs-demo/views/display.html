@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app>
   <head>
     <% include meta.html %>
 
@@ -11,40 +11,49 @@
   <body>
     <% include header.html %>
 
-    <div class="container">
+    <div class="container" ng-controller="DisplayCtrl">
 
       <div class="row row-offcanvas row-offcanvas-right">
 
         <div class="col-xs-12 col-sm-9">
           <div class="jumbotron">
-            <h1>至二文化室</h1>
-            <img class="dis-show" src="./img/0.jpg">
-            <p>申请后要使用请去找至二的楼管，需要压卡。</p>
+            <h1 ng-model="room_name"><%= room.room_name %></h1>
+            {{room_name}}
+            <img class="dis-show" src="/images/0.jpg">
+            <p><%= room.detail %></p>
           </div>
           <div class="row">
             <h2>吐槽区</h2>
             <div class="col-12 col-sm-12 col-lg-12">
-              <div class="content">
+              <div class="content" ng-repeat="dis in room.discuss">
+                <p class="comment">{{ dis.content }}</p>
+                <p><span>NO.{{ $index }}</span>☆☆☆<span>{{ dis.nickname }}</span>于<span>{{ dis.create_date }}</span>留言☆☆☆</p>
+              </div>
+              <!-- <div class="content">
                 <p class="comment">这里是脑洞区，匿名。</p>
                 <p><span>NO.0</span>☆☆☆<span>= =</span>于<span>2015-04-22 10:17:41</span>留言☆☆☆</p>
               </div>
+              <div class="content">
+                <p class="comment">这里是脑洞区，匿名。</p>
+                <p><span>NO.0</span>☆☆☆<span>= =</span>于<span>2015-04-22 10:17:41</span>留言☆☆☆</p>
+              </div> -->
             </div><!--/span-->
             <form class="form-horizontal">
               <div class="form-group">
                 <label for="sub-name" class="col-sm-2 control-label">名字</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="sub-name" placeholder="可匿名">
+                  <input ng-model="discuss.nickname" type="text" class="form-control" id="sub-name" placeholder="可匿名">
                 </div>
               </div>
               <div class="form-group">
                 <label for="sub-name" class="col-sm-2 control-label">内容</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" id="sub-name" rows="10"></textarea>             
+                  <textarea ng-model="discuss.content" class="form-control" id="sub-name" rows="10"></textarea>             
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button class="btn btn-md btn-primary" type="submit">发表</button>
+                  <button ng-click="discussAdd()" class="btn btn-md btn-primary" type="submit">发表</button>
                 </div>
               </div>
             </form>
@@ -52,6 +61,15 @@
         </div><!--/span-->
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="list-group">
+            <div class="list-group-item active">今天已申请时间段</div>
+
+            <!-- <a href="#" class="list-group-item">8:00-9:00</a> -->
+            <!-- xuanran -->
+            <% for(var i = 0; i < applied.length; i++){ %>
+            <a href="#" class="list-group-item"><%= applied[i].start_time %>:00-<%= applied[i].end_time %>:00</a>
+            <% } %>
+          </div>
         </div><!--/span-->
       </div><!--/row-->
 
@@ -66,6 +84,6 @@
 
 
     <% include footer.html %>
-    <script src="./js/offcanvas.js"></script>
+    <script src="/javascripts/display.js"></script>
   </body>
 </html>
