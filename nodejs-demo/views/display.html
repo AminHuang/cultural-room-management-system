@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include meta.html %>
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/display.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <% include header.html %>
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+          <div class="jumbotron">
+            <h1>至二文化室</h1>
+            <img class="dis-show" src="./img/0.jpg">
+            <p>申请后要使用请去找至二的楼管，需要压卡。</p>
+          </div>
+          <div class="row">
+            <h2>吐槽区</h2>
+            <div class="col-12 col-sm-12 col-lg-12">
+              <div class="content">
+                <p class="comment">这里是脑洞区，匿名。</p>
+                <p><span>NO.0</span>☆☆☆<span>= =</span>于<span>2015-04-22 10:17:41</span>留言☆☆☆</p>
+              </div>
+            </div><!--/span-->
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="sub-name" class="col-sm-2 control-label">名字</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="sub-name" placeholder="可匿名">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="sub-name" class="col-sm-2 control-label">内容</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" id="sub-name" rows="10"></textarea>             
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button class="btn btn-md btn-primary" type="submit">发表</button>
+                </div>
+              </div>
+            </form>
+          </div><!--/row-->
+        </div><!--/span-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2014</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+
+    <% include footer.html %>
+    <script src="./js/offcanvas.js"></script>
+  </body>
+</html>

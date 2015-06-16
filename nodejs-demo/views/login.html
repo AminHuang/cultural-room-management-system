@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include meta.html %>
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/signin.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" role="form" method="post">
+        <h3 class="form-signin-heading">请登录</h3>
+        <%- message %>
+        <input name="user_id" type="text" class="form-control" placeholder="学号" required autofocus>
+        <input name="password" type="password" class="form-control" placeholder="密码" required>
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> 记住我
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+      </form>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <% include footer.html %>
+  </body>
+</html>
