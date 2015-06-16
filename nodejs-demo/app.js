@@ -4,21 +4,30 @@
  */
 
 var express = require('express');
+var logger = require('morgan');
+var methodOverride = require('method-override');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
+var session = require('express-session');
+var serveStatic = require('serve-static');
+var errorhandler = require('errorhandler');
+
 var routes = require('./routes');
 var user = require('./routes/user');
 var search = require('./routes/search');
 var apply = require('./routes/apply');
 var movie = require('./routes/movie');
 var dashboard = require('./routes/dashboard');
+
 var http = require('http');
 var path = require('path');
 var ejs = require('ejs');
 
-var SessionStore = require("session-mongoose")(express);
+var MongoStore = require("connect-mongostore")(session);
 
-var store = new SessionStore({
-  url: "mongodb://localhost/session",
-  interval: 120000
+var store = new MongoStore({
+  db: "session"
 });
 
 
@@ -27,21 +36,28 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
-// app.set('view engine', 'ejs');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(express.cookieParser());
-app.use(express.cookieSession({secret : 'fens.me'}));
-app.use(express.session({
-  secret : 'fens.me',
-  store: store,
-  cookie: { maxAge: 900000 }
+app.engine('html', require('ejs-mate'));
+
+app.use(logger('tiny'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
 }));
+
+app.use(methodOverride());
+app.use(cookieParser('crms', {
+  resave: true,
+  saveUninitialized: false
+}));
+
+app.use(cookieSession({secret : 'crms'}));
+app.use(session({
+  secret : 'crms',
+  store: store,
+  cookie: { maxAge: 900 * 1000 }
+}));
+
 app.use(function(req, res, next){
   res.locals.user = req.session.user;
   var err = req.session.error;
@@ -52,12 +68,12 @@ app.use(function(req, res, next){
   }
   next();
 });
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(serveStatic(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+  app.use(errorhandler());
 }
 
 app.get('/', routes.index);
