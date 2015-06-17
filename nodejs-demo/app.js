@@ -10,15 +10,27 @@ var search = require('./routes/search');
 var apply = require('./routes/apply');
 var movie = require('./routes/movie');
 var dashboard = require('./routes/dashboard');
+var about = require('./routes/about');
+var display = require('./routes/display');
 var http = require('http');
 var path = require('path');
 var ejs = require('ejs');
+var config = require('./models/config.json');
+var manager = require('./models/manager.js');
+if(!!config.redis) {
+  var redis = require('redis').createClient();
+  redis.flushall(function(err,res){
+    manager.init();
+  });
+}
+
+var mongoose = require('mongoose');
 
 var SessionStore = require("session-mongoose")(express);
 
 var store = new SessionStore({
   url: "mongodb://localhost/session",
-  interval: 120000
+  interval: 120000,
 });
 
 
@@ -34,7 +46,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(express.methodOverride());
+// app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.cookieSession({secret : 'fens.me'}));
 app.use(express.session({
@@ -78,18 +90,28 @@ app.post('/dashboard/roomAdd',dashboard.roomAdd);
 
 app.all('/apply', authenticaiton);
 app.get('/apply', apply.apply);
+app.get('/apply/getRoom', apply.getRoom);
 app.post('/apply/add', apply.applyAdd);
 
 app.all('/search', authenticaiton);
 app.get('/search', search.search);
+app.post('/search/getApply', search.searchDo);
 
+app.all('/about', authenticaiton);
+app.get('/about', about.about);
+app.post('/about/deleteApply', about.deleteApply);
+
+app.all('/display', authenticaiton);
+app.get('/display', display.display);
+app.get('/display/getRoom', display.getRoom);
+app.post('/display/discussAdd', display.discussAdd);
 
 app.get('/home', authenticaiton);
 app.get('/home', routes.home);
 // app.get('/apply', routes.apply);
 
-app.get('/movie/add',movie.movieAdd);//增加
-app.post('/movie/add',movie.doMovieAdd);//提交
+// app.get('/movie/add',movie.movieAdd);//增加
+// app.post('/movie/add',movie.doMovieAdd);//提交
 // app.get('/movie/:name',movie.movieAdd);//编辑查询
 // app.get('/movie/json/:name',movie.movieJSON);//JSON数据
 

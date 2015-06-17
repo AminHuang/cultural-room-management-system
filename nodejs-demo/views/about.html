@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include meta.html %>
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/dashboard.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <% include header.html %>
+
+    <div class="container-fluid" ng-controller="AboutCtrl">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="#usermessage">用户信息</a></li>
+            <li><a href="#applied">已申请文化室</a></li>
+            <li><a href="#">添加文化室</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">修改文化室</a></li>
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h2 id="usermessage" class="sub-header">用户信息</h2>
+          <div class="row">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="user_id" class="col-sm-2 control-label">学号</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="user_id" required readonly value="<%= user.user_id %>">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="user_name" class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="user_name" required readonly value="<%= user.user_name %>">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email" class="col-sm-2 control-label">邮箱</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="email" required readonly value="<%= user.email %>">
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <h2 id="applied" class="sub-header">已申请文化室</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>序号</th>
+                  <th>文化室</th>
+                  <th>团队名称</th>
+                  <th>申请使用日期</th>
+                  <th>起始时间</th>
+                  <th>结束时间</th>
+                  <th>使用人数</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- xuanran -->
+                <% for(var i = 0; i < applies.length; i++){ %>
+                <tr>
+                <td><%= i %></td>
+                <td><%= applies[i].apply_room %></td>
+                <td><%= applies[i].apply_team %></td>
+                <td><%= applies[i].apply_date.toLocaleDateString() %></td>
+                <td><%= applies[i].start_time %>:00</td>
+                <td><%= applies[i].end_time %>:00</td>
+                <td><%= applies[i].apply_num %></td>
+                <% if(applies[i].apply_date.getTime() > (new Date()).getTime()) { %>
+                <td><button class="btn btn-primary btn-sm delete" data-id="<%= applies[i]._id %>">取消申请</button></td>
+                <% } else { %>
+                <td></td>
+                <% } %>
+                </tr>
+                <% } %>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <% include footer.html %>
+    <script src="/javascripts/dashboard.js"></script>
+    <script src="/javascripts/about.js"></script>
+  </body>
+</html>

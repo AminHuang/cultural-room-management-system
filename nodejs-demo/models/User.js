@@ -20,9 +20,9 @@ UserDAO.prototype.save = function(obj, callback) {
 }
 
 UserDAO.prototype.findByName = function(user_id, callback) {
-User.findOne({user_id:user_id}, function(err, obj){
-callback(err, obj);
-});
+  User.findOne({user_id:user_id}, function(err, obj){
+    callback(err, obj);
+  });
 };
 
 UserDAO.prototype.updateByName = function(user_id,json,callback) {

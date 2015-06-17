@@ -2,9 +2,13 @@
 /*
  * GET home page.
  */
+var Room = require('./../models/Room.js');
 
 exports.index = function(req, res){
-  res.render('index', { title: '首页' });
+  var room = Room.findAll(function(err,obj){
+    res.render('index', { title: '首页', rooms: obj });
+  });
+  
 };
 
 exports.login = function(req, res) {
@@ -52,7 +56,7 @@ exports.home = function(req, res) {
 };
 
 exports.signup = function(req, res) {
-  res.render('signup', {title:'用户注册'})
+  res.render('signup', {title:'用户注册'});
 }
 
 var User = require('./../models/User.js');
@@ -81,3 +85,4 @@ exports.doSignup = function(req, res) {
     }
   });
 }
+
