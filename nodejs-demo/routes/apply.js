@@ -1,7 +1,20 @@
 var Apply = require('./../models/Apply.js');
+var Room = require('./../models/Room.js');
+
 
 exports.apply = function(req, res){
-  res.render('apply', { title: '申请' });
+  var room = Room.findAll(function(err,obj){
+    res.render('apply', { title: '申请', rooms: obj });
+  });
+  
+};
+
+exports.getRoom = function(req, res){
+  var room = Room.findAll(function(err,obj){
+    var user = req.session.user;
+    res.send({rooms: obj, user_id:user.user_id, user_name:user.user_name});
+  });
+  
 };
 
 exports.applyAdd = function(req, res) {
@@ -10,18 +23,14 @@ exports.applyAdd = function(req, res) {
   var old = Apply.findByNameAndDate(json.apply_room, json.apply_date, function(err,obj){
     console.log(obj);
     if(obj.length == 0) {
-        console.log("len0");
       var apply = Apply.save(json, function(err){
         if(err) {
-            console.log("len0saveok");
           res.send({'success':false, 'err':err});
         } else {
-            console.log("len0saveno");
           res.send({'success': true});
         }
       });
     } else {
-      console.log("len1");
       var flag = true;
       for(var i = 0; i < obj.length; i++) {
         var tmp = obj[i];
@@ -29,7 +38,6 @@ exports.applyAdd = function(req, res) {
         console.log(tmp.end_time);
         console.log(json.start_time);
         if(tmp.end_time >= json.start_time || tmp.start_time <= json.end_time) {
-            console.log("len1no");
             flag = false;
           res.send({'success':false});
           break;
@@ -39,10 +47,8 @@ exports.applyAdd = function(req, res) {
       if(flag) {
         var apply = Apply.save(json, function(err){
           if(err) {
-            console.log("len1saveok");
             res.send({'success':false, 'err':err});
           } else {
-            console.log("len1saveno");
             res.send({'success': true});
           }
         });
