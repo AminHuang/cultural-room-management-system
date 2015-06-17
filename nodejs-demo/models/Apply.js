@@ -30,7 +30,7 @@ callback(err, obj);
 };
 
 ApplyDAO.prototype.findByDate = function(apply_date, callback) {
-Apply.find({apply_date:apply_date}, function(err, obj){
+Apply.findOne({apply_date:apply_date}, function(err, obj){
 callback(err, obj);
 });
 };
@@ -42,25 +42,13 @@ callback(err, obj);
 };
 
 ApplyDAO.prototype.findById = function(apply_id, callback) {
-Apply.find({apply_id:apply_id}, function(err, obj){
+Apply.findOne({apply_id:apply_id}, function(err, obj){
 callback(err, obj);
 });
 };
 
 ApplyDAO.prototype.updateByName = function(Apply_name,json,callback) {
-  Apply.update({apply_name:apply_name},json,function(err,obj){
-    callback(err,obj);
-  });
-}
-
-ApplyDAO.prototype.remove = function(_id, callback) {
-  Apply.remove({_id:_id, },function(err,obj){
-    callback(err,obj);
-  });
-}
-
-ApplyDAO.prototype.deleteByName = function(apply_name,apply_date,start_time, end_time, callback) {
-  Apply.remove({apply_name:apply_name, },function(err,obj){
+  Apply.update({Apply_name:Apply_name},json,function(err,obj){
     callback(err,obj);
   });
 }
