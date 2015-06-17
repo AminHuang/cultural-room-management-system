@@ -4,7 +4,6 @@ var RoomSchema = new Schema({
   room_name:String,
   detail:String,
   discuss:[{
-    number: String,
     nickname:String,
     content:String,
     create_date:{type:Date, default:Date.now}
@@ -23,6 +22,13 @@ RoomDAO.prototype.save = function(obj, callback) {
   });
 }
 
+RoomDAO.prototype.findAll = function(callback) {
+Room.find({}, function(err, obj){
+callback(err, obj);
+});
+};
+
+
 RoomDAO.prototype.findByName = function(room_name, callback) {
 Room.findOne({room_name:room_name}, function(err, obj){
 callback(err, obj);
@@ -30,7 +36,7 @@ callback(err, obj);
 };
 
 RoomDAO.prototype.updateByName = function(room_name,json,callback) {
-  Room.update({room_name:room_name},json,function(err,obj){
+  Room.update({room_name:room_name},{$set:{discuss:json}},function(err,obj){
     callback(err,obj);
   });
 }
