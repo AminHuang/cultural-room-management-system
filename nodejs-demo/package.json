@@ -1,13 +1,37 @@
 {
   "name": "cultural-room-management-system",
-  "version": "0.0.0",
-  "description": "",
+  "version": "1.0.0",
+  "description": "A cultural room management system",
   "main": "app.js",
+  "private": true,
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "AminHuang",
+  "contributors": [
+    "CharlesHelb",
+    "joyeecheung",
+    "guopm",
+    "dreamend1993"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AminHuang/cultural-room-management-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AminHuang/cultural-room-management-system/issues"
+  },
+  "homepage": "http://aminhuang.github.io/cultural-room-management-system/",
+  "keywords": [
+    "express",
+    "app",
+    "ejs",
+    "web",
+    "redis",
+    "mongodb"
+  ],
+  "license": "BSD",
   "dependencies": {
     "body-parser": "^1.13.0",
     "connect": "^3.3.5",
@@ -24,5 +48,17 @@
     "morgan": "^1.6.0",
     "serve-favicon": "^2.3.0",
     "serve-static": "^1.9.3"
-  }
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "files": [
+    "app.js",
+    "README.md",
+    "package.json",
+    "models/",
+    "public/",
+    "routes/",
+    "views/"
+  ]
 }
