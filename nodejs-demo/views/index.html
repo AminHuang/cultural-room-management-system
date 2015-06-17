@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+  <head>
+    <% include meta.html %>
+
+    <link href="/stylesheets/offcanvas.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <% include header.html %>
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">
+            <h2>使用说明</h2>
+            <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
+          </div>
+          <div class="row" ng-controller="RoomListCtrl">
+            <!-- xuanran -->
+            <% for(var i = 0; i < rooms.length; i++){ %>
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h3><%= rooms[i].room_name %></h3>
+              <p><%= rooms[i].detail %></p>
+              <p><a class="btn btn-default" href="display?room=<%= rooms[i].room_name %>" role="button">查看详情 &raquo;</a></p>
+            </div><!--/span-->
+            <% } %>
+          </div><!--/row-->
+        </div><!--/span-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="list-group">
+            <div class="list-group-item active">经常被使用的文化室</div>
+            <a href="#" class="list-group-item">至二文化室</a>
+            <a href="#" class="list-group-item">慎五文化室</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2014</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+    <% include footer.html %>
+    <script src="/javascripts/offcanvas.js"></script>
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>

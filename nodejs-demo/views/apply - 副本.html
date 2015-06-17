@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+  <head>
+    <% include meta.html %>
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/apply.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <% include header.html %>
+
+    <div class="container" ng-controller="ApplyCtrl">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+        <div class="page-header">
+          <h1>请以团队名义申请文化室</h1>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+          
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="applyroom" class="col-sm-2 control-label">文化室</label>
+              <div class="col-sm-10">
+                <select ng-model="applied.apply_room" id="applyroom" class="form-control">
+                  <option ng-repeat="room in rooms" value="{{ room.room_name }}"> {{room.room_name}} </option>
+
+                  <% for(var i = 0; i < rooms.length; i++){ %>
+                  <option value="<%= rooms[i].room_name %>"><%= rooms[i].room_name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="applyid" class="col-sm-2 control-label">学号</label>
+              <div class="col-sm-10">
+                <input ng-model="applied.apply_id" type="text" class="form-control" id="applyid" value="<%= user.user_id %>" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="applyname" class="col-sm-2 control-label">姓名</label>
+              <div class="col-sm-10">
+                <input ng-model="applied.apply_name" type="text" class="form-control" id="applyname"  readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="applyteam" class="col-sm-2 control-label">团队名称</label>
+              <div class="col-sm-10">
+                <input ng-model="applied.apply_team" type="text" class="form-control" id="applyteam" placeholder="团队名称">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="applytime" class="col-sm-2 control-label">申请时间段</label>
+              <div class="col-sm-10 form-inline">
+                <input ng-model="applied.apply_date" id="applydate" type="date" class="form-control" placeholder="年-月-日" required autofocus>
+                <select ng-model="applied.start_time" id="startTime" class="form-control">
+                  <% for(var i = 8; i < 23; i++){ %>
+                  <option value="<%= i %>"><%= i %>:00</option>
+                  <% } %>
+                </select>
+                <span>-</span>
+                <select ng-model="applied.end_time" id="endTime" class="form-control">
+                  <% for(var i = 9; i < 24; i++){ %>
+                  <option value="<%= i %>"><%= i %>:00</option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="applynum" class="col-sm-2 control-label">使用人数</label>
+              <div class="col-sm-10">
+                <input ng-model="applied.apply_num" type="number" class="form-control" id="applynum" placeholder="使用人数">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <!-- <a href="javascript:void(0);" id="applybtn" class="btn btn-md btn-primary">申请</a> -->
+                <button ng-click="applyAdd()" id="applybtn" class="btn btn-md btn-primary">申请</button>
+              </div>
+            </div>
+            
+          </form>
+        
+        </div><!--/span-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <h3>我的申请</h3>
+          <div class="list-group">
+            <a href="#" class="list-group-item active">慎五文化室</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2014</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+    <% include footer.html %>
+    <script src="/javascripts/offcanvas.js"></script>
+    <script src="/javascripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="/javascripts/apply.js"></script>
+  </body>
+</html>

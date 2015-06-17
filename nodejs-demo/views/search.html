@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+  <head>
+    <% include meta.html %>
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/search.css" rel="stylesheet">
+
+    
+  </head>
+
+  <body >
+    <% include header.html %>
+
+    <div class="container" ng-controller="SearchCtrl">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <label for="date">日期</label>
+              <input ng-model="applied.apply_date" type="date" class="form-control" id="date" placeholder="年-月-日" required autofocus>
+            </div>
+            <div class="form-group">
+              <label for="startTime">起始时间</label>
+              <select id="startTime" class="form-control">
+                <option value="8">8:00</option>
+                <option value="22">22:00</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="endTime">结束时间</label>
+              <select id="endTime" class="form-control">
+                <option value="9">9:00</option>
+                <option value="23">23:00</option>
+              </select>
+              
+            </div>
+            <button ng-click="searchApplied()" id="searchBtn" class="btn btn-md btn-primary">查询</button>
+          </form>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>序号</th>
+                  <th>文化室名称</th>
+                  <th>申请时间段</th>
+                  <th>申请团体</th>
+                  <th>申请人</th>
+                </tr>
+              </thead>
+              <tbody >
+                <!-- angular -->
+                <tr ng-repeat="arr in apply_arr">
+                  <td>{{$index + 1}}</td>
+                  <td>{{arr.apply_room}}</td>
+                  <td>{{applied.apply_date}} {{arr.start_time}}:00至{{arr.end_time}}:00</td>
+                  <td>{{arr.apply_team}}</td>
+                  <td>{{arr.apply_name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+        </div><!--/span-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <!-- <div class="list-group">
+            <div class="list-group-item active">我的申请</div>
+            <a href="#" class="list-group-item">慎五文化室</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+          </div> -->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2014</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+
+    <% include footer.html %>
+    <script src="/javascripts/offcanvas.js"></script>
+    <script src="/javascripts/search.js"></script>
+  </body>
+</html>
