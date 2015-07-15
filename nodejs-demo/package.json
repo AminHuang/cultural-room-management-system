@@ -1,6 +1,6 @@
 {
   "name": "cultural-room-management-system",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A cultural room management system",
   "main": "app.js",
   "private": true,
@@ -13,7 +13,8 @@
     "CharlesHelb",
     "joyeecheung",
     "guopm",
-    "dreamend1993"
+    "dreamend1993",
+    "huxd"
   ],
   "repository": {
     "type": "git",
@@ -48,7 +49,7 @@
     "morgan": "^1.6.0",
     "serve-favicon": "^2.3.0",
     "serve-static": "^1.9.3",
-	"redis" : "*"
+    "redis" : "*"
   },
   "engines": {
     "node": ">= 0.10.0"

@@ -7,11 +7,12 @@ exports.dashboard = function(req, res){
 exports.roomAdd = function(req, res) {
   console.log(req.body.content);
   var json = req.body.content;
-  var room = Room.findByName(json.room_name,function(err,obj){
+  var room = Room.findOne({room_name:json.room_name},function(err,obj){
     if(!!obj) {
       res.send({'success':false, 'err':'已有该文化室'});
     } else {
-      Room.save(json, function(err) {
+      var instance = new Room(json);
+      instance.save(function(err) {
         if(err) {
           res.send({'success':false, 'err':err});
         } else {

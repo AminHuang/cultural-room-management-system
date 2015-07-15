@@ -1,22 +1,10 @@
 /**
  * Models
  */
-var User = require("./models/User")._model;
-var Room = require("./models/Room")._model;
-var Apply = require("./models/Apply")._model;
+var User = require("./models/User");
+var Room = require("./models/Room");
+var Apply = require("./models/Apply");
 
-/**
- * Clear redis cache
- */
-var config = require('./models/config.json');
-var manager = require('./models/manager.js');
-
-if(!!config.redis) {
-  var redis = require('redis').createClient();
-  redis.flushall(function(err,res) {
-    manager.init();
-  });
-}
 
 /**
  * Mock data

@@ -3,14 +3,14 @@ var Room = require('./../models/Room.js');
 
 
 exports.apply = function(req, res){
-  var room = Room.findAll(function(err,obj){
+  var room = Room.find({},function(err,obj){
     res.render('apply', { title: '申请', rooms: obj });
   });
   
 };
 
 exports.getRoom = function(req, res){
-  var room = Room.findAll(function(err,obj){
+  var room = Room.find({},function(err,obj){
     var user = req.session.user;
     res.send({rooms: obj, user_id:user.user_id, user_name:user.user_name});
   });
@@ -20,10 +20,11 @@ exports.getRoom = function(req, res){
 exports.applyAdd = function(req, res) {
   var json = req.body.content;
   console.log(json);
-  var old = Apply.findByNameAndDate(json.apply_room, json.apply_date, function(err,obj){
+  var old = Apply.find({apply_room:json.apply_room, apply_date:ajson.apply_date}, function(err,obj){
     console.log(obj);
     if(obj.length == 0) {
-      var apply = Apply.save(json, function(err){
+      var instance = new Apply(json);
+      var apply = instance.save(function(err){
         if(err) {
           res.send({'success':false, 'err':err});
         } else {
@@ -45,7 +46,8 @@ exports.applyAdd = function(req, res) {
         }
       }
       if(flag) {
-        var apply = Apply.save(json, function(err){
+        var instance = new Apply(json);
+        var apply = instance.save(function(err){
           if(err) {
             res.send({'success':false, 'err':err});
           } else {

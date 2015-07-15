@@ -3,9 +3,10 @@
  * GET home page.
  */
 var Room = require('./../models/Room.js');
+var User = require('./../models/User.js');
 
 exports.index = function(req, res){
-  var room = Room.findAll(function(err,obj){
+  var room = Room.find({},function(err,obj){
     res.render('index', { title: '首页', rooms: obj });
   });
   
@@ -17,8 +18,8 @@ exports.login = function(req, res) {
 
 exports.doLogin = function(req, res) {
   var json = req.body;
-  console.log(json);
-  var user = User.findByName(json.user_id,function(err,obj){
+
+  var user = User.findOne({user_id:json.user_id},function(err,obj){
     if(!obj) {
       // res.send({'success':false, 'err':err});
       req.session.error = '用户不存在';
@@ -59,19 +60,20 @@ exports.signup = function(req, res) {
   res.render('signup', {title:'用户注册'});
 }
 
-var User = require('./../models/User.js');
+
 exports.doSignup = function(req, res) {
   var json = req.body;
   console.log(json);
   console.log(json.user_id);
-  var user = User.findByName(json.user_id,function(err,obj){
+  var user = User.findOne({user_id:json.user_id},function(err,obj){
     if(!!obj) {
       // res.send({'success':false, 'err':err});
       req.session.error = '用户已存在';
       res.redirect('/signup');
       // User.updateByName(json.user_id,json,function(err,obj){});
     } else {
-      User.save(json, function(err) {
+      var instance = new User(json);
+      instance.save(function(err) {
         if(err) {
           // res.send({'success':false, 'err':err});
           req.session.error = '注册出现错误';
